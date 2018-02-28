@@ -28,10 +28,12 @@ namespace opencvsharp_webcamera
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var capture = new VideoCapture(0);
+            using (var capture = new VideoCapture(0))
             using (var win = new OpenCvSharp.Window("capture"))
             using (var mat = new Mat())
             {
+                capture.Set(CaptureProperty.FrameWidth, 640);
+                capture.Set(CaptureProperty.FrameHeight, 360);
                 while (true)
                 {
                     capture.Read(mat);
